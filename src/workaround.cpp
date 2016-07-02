@@ -1,6 +1,6 @@
 #include "workaround.hpp"
 
-void MatrixProcessorImpl::Threshold(uchar* const data, const int width,
+void MatrixProcessor::Threshold(uchar* const data, const int width,
     const int height, const int threshold) {
   for (int row = 0; row < height; row++) {
     for (int col = 0; col < width; col++) {

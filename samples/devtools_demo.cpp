@@ -15,6 +15,7 @@ const char* kAbout =
 
 const char* kOptions =
     "{ @image         |        | image to process         }"
+    "{ t              |  128   | threshold                }"
     "{ h ? help usage |        | print help message       }";
 
 
@@ -45,9 +46,15 @@ int main(int argc, const char** argv) {
   waitKey(kWaitKeyDelay);
 
   // Threshold data.
-  MatrixProcessorImpl processor;
-  const int threshold = 128;
-  processor.Threshold(src.data, src.cols, src.rows, threshold);
+  MatrixProcessor processor;
+  const int threshold = parser.get<int>("t");
+  try {
+    processor.Threshold(src.data, src.cols, src.rows, threshold);
+  }
+  catch (const std::exception& ex) {
+    cout << ex.what() << endl;
+    return 0;
+  }  
 
   // Show destination image.
   const string kDstWindowName = "Destination image";
